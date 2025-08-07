@@ -75,11 +75,11 @@ Evaluation on synthetic and real-world datasets
 If you find the code helpful in your research or work, please cite the following paper(s).
 
 ```
-@article{chen2024grounding,
-  title={Grounding-IQA: Multimodal Language Grounding Model for Image Quality Assessment},
-  author={Chen, Zheng and Zhang, Xun and Li, Wenbo and Pei, Renjing and Song, Fenglong and Min, Xiongkuo and Liu, Xiaohong and Yuan, Xin and Guo, Yong and Zhang, Yulun},
-  journal={arXiv preprint arXiv:2411.17237},
-  year={2024}
+@article{chai2025quantvsr,
+  title={QuantVSR: Low-Bit Post-Training Quantization for Real-World Video Super-Resolution},
+  author={Bowen Chai, Zheng Chen, Libo Zhu, Wenbo Li, Yong Guo, and Yulun Zhang},
+  journal={arXiv preprint arXiv:2508.04485},
+  year={2025}
 }
 ```
 
