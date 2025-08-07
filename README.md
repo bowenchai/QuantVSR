@@ -9,7 +9,8 @@
 <a href="https://github.com/bowenchai/QuantVSR" target='_blank' style="text-decoration: none;"><img src="https://visitor-badge.laobi.icu/badge?page_id=bowenchai/QuantVSR"></a>
 <a href="https://github.com/bowenchai/QuantVSR/stargazers" target='_blank' style="text-decoration: none;"><img src="https://img.shields.io/github/stars/bowenchai/QuantVSR?style=social"></a>
 </div>
-[project] [arXiv] [supplementary material] [dataset] [pretrained models]
+
+[project] [[arXiv](https://arxiv.org/abs/2508.04485)] [supplementary material] [dataset] [pretrained models]
 
 #### 🔥🔥🔥 News
 
@@ -68,6 +69,19 @@ Evaluation on synthetic and real-world datasets
 </p>
 
 </details>
+
+## <a name="citation"></a>📎 Citation
+
+If you find the code helpful in your research or work, please cite the following paper(s).
+
+```
+@article{chen2024grounding,
+  title={Grounding-IQA: Multimodal Language Grounding Model for Image Quality Assessment},
+  author={Chen, Zheng and Zhang, Xun and Li, Wenbo and Pei, Renjing and Song, Fenglong and Min, Xiongkuo and Liu, Xiaohong and Yuan, Xin and Guo, Yong and Zhang, Yulun},
+  journal={arXiv preprint arXiv:2411.17237},
+  year={2024}
+}
+```
 
 ## <a name="acknowledgements"></a>💡 Acknowledgements
 
