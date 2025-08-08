@@ -10,7 +10,7 @@
 <a href="https://github.com/bowenchai/QuantVSR/stargazers" target='_blank' style="text-decoration: none;"><img src="https://img.shields.io/github/stars/bowenchai/QuantVSR?style=social"></a>
 </div>
 
-[project] [[arXiv](https://arxiv.org/abs/2508.04485)] [[supplementary material](https://github.com/bowenchai/QuantVSR/releases/download/v1/Supplementary_Material.pdf)] [dataset] [pretrained models]
+[[project](https://bowenchai.github.io/QuantVSR/)] [[arXiv](https://arxiv.org/abs/2508.04485)] [[supplementary material](https://github.com/bowenchai/QuantVSR/releases/download/v1/Supplementary_Material.pdf)] [dataset] [pretrained models]
 
 #### 🔥🔥🔥 News
 
