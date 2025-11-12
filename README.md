@@ -14,6 +14,7 @@
 
 #### 🔥🔥🔥 News
 
+- **2025-11-08**: QuantVSR is accepted by AAAI 2026. 🎉🎉🎉 (The code will be released within a week.)
 - **2025-08-06:** This repo is released.
 
 ---
