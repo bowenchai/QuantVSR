@@ -1,0 +1,146 @@
+[project]
+authors = [{ name = "chaibowen", email = "chaibowen@sjtu.edu.cn" }]
+dependencies = []
+name = "QuantVSR"
+requires-python = ">= 3.9"
+version = "0.1.0"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.system-requirements]
+cuda = "12"
+
+# ####################
+# ### Environments ###
+# ####################
+
+# Default Environments
+[tool.pixi.dependencies]
+python = "3.10.*"
+pytorch-gpu = ">=2.7.1,<3"
+torchvision = ">=0.22.0,<0.23"
+albumentations = ">=2.0.8,<3"
+opencv = ">=4.12.0,<5"
+imageio = ">=2.37.0,<3"
+imageio-ffmpeg = ">=0.6.0,<0.7"
+pytorch-lightning = ">=2.5.3,<3"
+omegaconf = ">=2.3.0,<3"
+einops = ">=0.8.1,<0.9"
+transformers = ">=4.55.2,<5"
+kornia = ">=0.8.1,<0.9"
+open-clip-torch = ">=3.1.0,<4"
+xformers = ">=0.0.31.post1,<0.0.32"
+matplotlib = ">=3.9.4,<4"
+wandb = ">=0.21.1,<0.22"
+pillow = ">=11.3.0,<12"
+av = ">=15.0.0,<16"
+openmim = ">=0.3.7,<0.4"
+scikit-image = ">=0.24.0,<0.25"
+scikit-learn = ">=1.6.1,<2"
+mmcv = ">=2.2.0,<3"
+numpy = "1.26.0.*"
+pyfiglet = ">=1.0.4,<2"
+colorama = ">=0.4.6,<0.5"
+[tool.pixi.pypi-dependencies]
+pyiqa = ">=0.1.10, <0.2"
+clip = { git = "https://github.com/openai/CLIP.git" }
+taming-transformers = { git = "https://github.com/CompVis/taming-transformers.git", rev = "570b7894645a21d09f15c81a7762feb88b5beae1" }
+quantvsr = { path = ".", editable = true }
+
+# Dover Environment
+[tool.pixi.feature.dover.dependencies]
+python = "3.10.*"
+[tool.pixi.feature.dover.pypi-dependencies]
+numpy = "==1.26.4"
+torch = "==1.13.1"
+torchvision = "==0.14.1"
+torchaudio = "==0.13.1"
+pyiqa = ">=0.1.14.1, <0.2"
+bitsandbytes = "==0.38.0"
+imageio-ffmpeg = ">=0.6.0,<0.7"
+dover = { path = "./benchmarks/DOVER", editable = true }
+
+# Ewarp Environment
+[tool.pixi.feature.ewarp.dependencies]
+python = "3.11.*"
+[tool.pixi.feature.ewarp.pypi-dependencies]
+torch = "==2.3.1"
+torchvision = "==0.18.1"
+torchaudio = "==2.3.1"
+matplotlib = ">=3.10.3, <4"
+tensorboard = ">=2.19.0, <3"
+scipy = ">=1.16.0, <2"
+opencv-python = ">=4.12.0.88, <5"
+tqdm = ">=4.67.1, <5"
+ipdb = ">=0.13.13, <0.14"
+natsort = ">=8.4.0, <9"
+imageio = ">=2.37.0, <3"
+imageio-ffmpeg = ">=0.6.0, <0.7"
+resample2d_cuda = { path = "./benchmarks/RAFT/networks/resample2d_package" }
+
+[tool.pixi.environments]
+dover = { features = ["dover"], no-default-feature = true }
+ewarp = { features = ["ewarp"], no-default-feature = true }
+
+
+# #############
+# ### Tasks ###
+# #############
+[tool.pixi.tasks.calibration]
+args = [{ "arg" = "bits", "default" = "4" }]
+cmd = "python scripts/calibration.py --bits {{bits}}"
+
+[tool.pixi.tasks.inference]
+args = [
+  { "arg" = "dataset", "default" = "SPMCS" },
+  { "arg" = "upscale", "default" = "4" },
+  { "arg" = "bits", "default" = "4" },
+]
+cmd = "python scripts/inference.py --input_dir data/{{dataset}}/LQ --output_dir experiments/w{{bits}}a{{bits}}/{{dataset}} --upscale {{upscale}} --bits {{bits}}"
+
+[tool.pixi.tasks.infer-fp]
+args = [
+  { "arg" = "dataset", "default" = "SPMCS" },
+  { "arg" = "upscale", "default" = "4" },
+]
+cmd = "python scripts/infer_fp.py --input_dir data/{{dataset}}/LQ --output_dir experiments/fp/{{dataset}} --upscale {{upscale}}"
+
+[tool.pixi.tasks.eval_metrics]
+cwd = "./benchmarks/"
+args = ["pred", "gt", "metrics"]
+cmd = [
+  "python",
+  "$PIXI_PROJECT_ROOT/benchmarks/eval_metrics.py",
+  "--pred",
+  "$PIXI_PROJECT_ROOT/{{pred}}",
+  "--gt",
+  "$PIXI_PROJECT_ROOT/{{gt}}",
+  "--metrics",
+  "{{metrics}}",
+]
+
+[tool.pixi.feature.dover.tasks.eval_dover]
+cwd = "./benchmarks/"
+args = ["pred"]
+cmd = [
+  "python",
+  "$PIXI_PROJECT_ROOT/benchmarks/eval_dover.py",
+  "--pred",
+  "$PIXI_PROJECT_ROOT/{{pred}}",
+]
+
+[tool.pixi.feature.ewarp.tasks.eval_ewarp]
+cwd = "./benchmarks/"
+args = ["pred"]
+cmd = [
+  "python",
+  "$PIXI_PROJECT_ROOT/benchmarks/eval_ewarp.py",
+  "--pred",
+  "$PIXI_PROJECT_ROOT/{{pred}}",
+]

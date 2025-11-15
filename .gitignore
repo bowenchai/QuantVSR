@@ -1,0 +1,22 @@
+# pixi environments
+.envrc
+.pixi/*
+!.pixi/config.toml
+
+# python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# weights
+/weights/
+/taming/
+
+# some hidden files
+.ruff.toml
+.syncignore
+
+# other files
+/data/
+/experiments/
+/wandb/
